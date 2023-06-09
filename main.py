@@ -20,6 +20,7 @@ def main():
     # bank.take_loan(user_1, 30001) #! larger amount than user_bank_balance * 2
     bank.take_loan(user_1, 20000)
     bank.take_loan(user_1, 20000)
+    user_1.show_loan_balance()
 
     user_1.show_available_balance()
     user_2.show_available_balance()

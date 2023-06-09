@@ -77,23 +77,24 @@ class Bank:
     # ? methods for admin
 
     def create_admin(self, account):
-        self.__admin = account
+        if account.isAdmin is True:
+            self.__admin = account
 
     def update_loan_permission(self, account, permission):
-        if self.__admin.email is account.email and self.__admin.password is account.password:
+        if self.__admin.email is account.email and self.__admin.password is account.password and account.isAdmin is True:
             self.__provide_load = permission
         else:
             print("Unauthorized access")
 
     def show_loan_amount(self, account):
-        if self.__admin.email is account.email and self.__admin.password is account.password:
+        if self.__admin.email is account.email and self.__admin.password is account.password and account.isAdmin is True:
             print(
                 f"Total loan amount of this bank is: {self.__total_loan_amount}")
         else:
             print("Unauthorized access")
 
     def show_total_available_balance(self, account):
-        if account.email == self.__admin.email and account.password == self.__admin.password:
+        if account.email == self.__admin.email and account.password == self.__admin.password and account.isAdmin is True:
             print(
                 f"Total available bank balance is: {self.__total_available_balance}")
         else:
