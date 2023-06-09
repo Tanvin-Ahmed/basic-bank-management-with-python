@@ -37,7 +37,7 @@
         "kind": 6,
         "importPath": "Bank",
         "description": "Bank",
-        "peekOfCode": "class Bank:\n    def __init__(self) -> None:\n        self.__user_list = {}\n        self.__total_available_balance = 0\n        self.__total_loan_amount = 0\n        self.__provide_load = True\n        self.__admin = None\n    def create_account(self, account):\n        self.__user_list[account.user_id] = account\n    def deposit(self, account, amount):",
+        "peekOfCode": "class Bank:\n    def __init__(self) -> None:\n        self.__user_list = {}\n        self.__total_available_balance = 0\n        self.__total_loan_amount = 0\n        self.__provide_load = True\n        self.__admin = None\n    def create_account(self, account):\n        self.__total_available_balance += account.deposit_amount\n        self.__user_list[account.user_id] = account",
         "detail": "Bank",
         "documentation": {}
     },
@@ -46,7 +46,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def main():\n    bank = Bank()\n    user_1 = User(\"Tanvin\", \"tanvin@gmail.com\", \"1234\", 10000)\n    user_2 = User(\"Ahmed\", \"ahmed@gmail.com\", \"5678\", 12000)\n    user_3 = User(\"Touhid\", \"touhid@gmail.com\", \"9876\", 15000)\n    admin = Admin(\"Amdin\", \"amdin@gmail.com\", \"123456\")\n    bank.create_account(user_1)\n    bank.create_account(user_2)\n    bank.create_account(user_3)\n    bank.create_admin(admin)",
+        "peekOfCode": "def main():\n    bank = Bank()\n    user_1 = User(\"Tanvin\", \"tanvin@gmail.com\", \"1234\", 10000)\n    user_2 = User(\"Ahmed\", \"ahmed@gmail.com\", \"5678\", 12000)\n    user_3 = User(\"Touhid\", \"touhid@gmail.com\", \"9876\", 15000)\n    bank.create_account(user_1)\n    bank.create_account(user_2)\n    bank.create_account(user_3)\n    admin = Admin(\"Amdin\", \"amdin@gmail.com\", \"123456\")\n    bank.create_admin(admin)",
         "detail": "main",
         "documentation": {}
     },
@@ -64,7 +64,7 @@
         "kind": 6,
         "importPath": "Person",
         "description": "Person",
-        "peekOfCode": "class User(Person):\n    def __init__(self, name, email, password, initial_amount) -> None:\n        super().__init__(name, email, password)\n        self.deposit_amount = initial_amount\n        self.user_id = uuid.uuid4()\n        self.loan_amount = 0\n        self.__transaction_history = {}\n    def save_transaction_history(self, transaction_id, description):\n        self.__transaction_history[transaction_id] = description\n    def show_transaction_history(self):",
+        "peekOfCode": "class User(Person):\n    def __init__(self, name, email, password, initial_amount) -> None:\n        super().__init__(name, email, password)\n        self.__deposit_amount = initial_amount\n        self.__user_id = uuid.uuid4()\n        self.__loan_amount = 0\n        self.__transaction_history = {}\n    @property\n    def user_id(self):\n        return self.__user_id",
         "detail": "Person",
         "documentation": {}
     },
